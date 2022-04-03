@@ -2,15 +2,15 @@ import React from "react";
 
 const items = [
     {
-        "name": "Todolist",
+        "name": "Users",
         href: "#"
     },
     {
-        "name": "About",
+        "name": "Projects",
         href: "#"
     },
     {
-        "name": "Home",
+        "name": "Todos",
         href: "#"
     }
 ]
@@ -28,7 +28,7 @@ const Menu = () => {
     return (
         <div className="menu">
             <ul>
-                {items.map((item) => <MenuItem item={item} />)}
+                {items.map((item) => <MenuItem item={item}/>)}
             </ul>
         </div>
     )
