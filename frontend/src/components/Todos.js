@@ -14,7 +14,7 @@ const TodoItem = ({todo}) => {
                 {todo.text}
             </td>
             <td className="td">
-                {todo.isActive === true? "Y": "N" }
+                {todo.isActive === true ? "Y" : "N"}
             </td>
         </tr>
     )
@@ -27,7 +27,7 @@ const TodoList = ({todos}) => {
                 Project Name
             </th>
             <th>
-                 Author
+                Author
             </th>
             <th>
                 Text
@@ -35,7 +35,7 @@ const TodoList = ({todos}) => {
             <th>
                 Is Active
             </th>
-            {todos.map((todo) => <TodoItem todo={todo} />)}
+            {todos.map((todo, index) => <TodoItem todo={todo} key={index}/>)}
         </table>
     )
 }

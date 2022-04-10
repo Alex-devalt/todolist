@@ -90,3 +90,7 @@ th, td {
 }
 
 tr:hover {background-color: lightgray;}
+
+.active{
+  background-color: gray;
+ }
