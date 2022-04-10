@@ -13,7 +13,7 @@ const ProjectItem = ({project}) => {
             </td>
             <td className="td">
                 <ol>
-                    {project.users.map((user) => <li>{user}</li>)}
+                    {project.users.map((user, index) => <li key={index}>{user}</li>)}
                 </ol>
             </td>
         </tr>
@@ -32,7 +32,7 @@ const ProjectsList = ({projects}) => {
             <th>
                 Users
             </th>
-            {projects.map((project) => <ProjectItem project={project}/>)}
+            {projects.map((project, index) => <ProjectItem project={project} key={index}/>)}
         </table>
     )
 }

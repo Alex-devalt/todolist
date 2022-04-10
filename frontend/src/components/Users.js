@@ -35,7 +35,7 @@ const UsersList = ({users}) => {
             <th>
                 Email
             </th>
-            {users.map((user) => <UserItem user={user}/>)}
+            {users.map((user, index) => <UserItem user={user} key={index}/>)}
         </table>
     )
 }
