@@ -195,7 +195,7 @@ class App extends React.Component {
                         <Route exact path='/todos' component={() => <TodoList
                             todos={this.state.todos}/>}/>
                         <Route exact path='/login' component={() => <LoginForm
-                            getToken={(username, password) => this.getToken(username, password)}/>}/>
+                            getToken={(username, password) => {this.getToken(username, password);}}/>}/>
                         <Route path="/project/:name">
                             <ProjectList items={this.state.projects}/>
                         </Route>
