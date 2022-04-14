@@ -46,8 +46,13 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
         model = Project
         fields = '__all__'
 
-
 class TodoModelSerializer(HyperlinkedModelSerializer):
+    class Meta:
+        model = Todo
+        fields = ('project', 'author', 'text', 'created_at', 'updated_at', 'is_active', 'url')
+
+
+class TodoModelGetSerializer(HyperlinkedModelSerializer):
     project = ProjectListingSerializer(queryset=Project.objects.all())
     author = AuthorListingSerializer(queryset=User.objects.all())
 
