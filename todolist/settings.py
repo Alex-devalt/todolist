@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
+# fixing issue with django 4.0 and graphene-django compatibility
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
     'rest_framework',
     'users',
     'corsheaders',
@@ -177,4 +183,8 @@ REST_FRAMEWORK = {
 }
 SIMPLE_JWT = {
     'USER_ID_FIELD': 'uid',
+}
+
+GRAPHENE = {
+    "SCHEMA": "mainapp.schema.schema"
 }
