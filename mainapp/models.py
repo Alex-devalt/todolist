@@ -25,3 +25,4 @@ class Todo(models.Model):
 
     def delete(self, using=None, keep_parents=False):
         self.is_active = False
+        self.save()
