@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 
 const UserItem = ({user}) => {
@@ -21,22 +21,38 @@ const UserItem = ({user}) => {
 }
 
 const UsersList = ({users}) => {
+    const [filteredData, setFilteredData] = useState(users);
+    const handleFilter = (event) => {
+        const searchWord = event.target.value;
+        const filter = users.filter((value) => {
+            return value.username.toLowerCase().includes(searchWord.toLowerCase());
+        });
+        if (searchWord === "") {
+            setFilteredData(users);
+        } else {
+            setFilteredData(filter);
+        }
+
+    }
     return (
-        <table>
-            <th>
-                Username
-            </th>
-            <th>
-                First Name
-            </th>
-            <th>
-                Last Name
-            </th>
-            <th>
-                Email
-            </th>
-            {users.map((user, index) => <UserItem user={user} key={index}/>)}
-        </table>
+        <div>
+            <input type="text" placeholder="Search by name" onChange={handleFilter}/>
+            <table>
+                <th>
+                    Username
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Email
+                </th>
+                {filteredData.map((user, index) => <UserItem user={user} key={index}/>)}
+            </table>
+        </div>
     )
 }
 

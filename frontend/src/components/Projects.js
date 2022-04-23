@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link} from 'react-router-dom';
 
 
-const ProjectItem = ({project}) => {
+const ProjectItem = ({project, deleteProject}) => {
     return (
         <tr>
             <td className="td">
@@ -16,24 +16,46 @@ const ProjectItem = ({project}) => {
                     {project.users.map((user, index) => <li key={index}>{user}</li>)}
                 </ol>
             </td>
+            <td>
+                <button onClick={() => deleteProject(project.id)} type='button'>Delete</button>
+            </td>
         </tr>
     )
 }
 
-const ProjectsList = ({projects}) => {
+const ProjectsList = ({projects, deleteProject}) => {
+    const [filteredData, setFilteredData] = useState(projects);
+    const handleFilter = (event) => {
+        const searchWord = event.target.value;
+        const filter = projects.filter((value) => {
+            return value.name.toLowerCase().includes(searchWord.toLowerCase());
+        });
+        if (searchWord === "") {
+            setFilteredData(projects);
+        } else {
+            setFilteredData(filter);
+        }
+
+    }
     return (
-        <table>
-            <th>
-                Project Name
-            </th>
-            <th>
-                URL
-            </th>
-            <th>
-                Users
-            </th>
-            {projects.map((project, index) => <ProjectItem project={project} key={index}/>)}
-        </table>
+        <div>
+            <input type="text" placeholder="Search by name" onChange={handleFilter}/>
+            <table>
+                <th>
+                    Project Name
+                </th>
+                <th>
+                    URL
+                </th>
+                <th>
+                    Users
+                </th>
+                <th></th>
+                {filteredData.map((project, index) => <ProjectItem project={project} deleteProject={deleteProject}
+                                                                   key={index}/>)}
+            </table>
+            <Link to='/projects/create'>Create</Link>
+        </div>
     )
 }
 
