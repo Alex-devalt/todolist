@@ -68,7 +68,7 @@ class App extends React.Component {
     getRefreshToken() {
         const refreshToken = this.cookies.get('refresh token');
         if (refreshToken !== '') {
-            axios.post('http://127.0.0.1:8000/api/token/refresh/', {
+            axios.post('http://80.78.245.74:8000/api/token/refresh/', {
                 'refresh': refreshToken
             }, {headers: {'Content-Type': 'application/json'}})
                 .then(response => {
@@ -88,7 +88,7 @@ class App extends React.Component {
     getToken(username, password) {
         this.setState({'username': username});
         this.cookies.set('username', username)
-        axios.post('http://127.0.0.1:8000/api/token/', {
+        axios.post('http://80.78.245.74:8000/api/token/', {
             username: username,
             password: password
         })
@@ -111,7 +111,7 @@ class App extends React.Component {
 
     deleteProject(id) {
         const headers = this.getHeaders();
-        axios.delete(`http://127.0.0.1:8000/api/projects/${id}`, {headers})
+        axios.delete(`http://80.78.245.74:8000/api/projects/${id}`, {headers})
             .then(response => {
                 this.setState({projects: this.state.projects.filter((item) => item.id !== id)})
             }).catch(error => console.log(error))
@@ -119,7 +119,7 @@ class App extends React.Component {
 
     deleteTodo(id) {
         const headers = this.getHeaders();
-        axios.delete(`http://127.0.0.1:8000/api/todos/${id}`, {headers})
+        axios.delete(`http://80.78.245.74:8000/api/todos/${id}`, {headers})
             .then(response => {
                 this.setState({todos: this.state.todos.filter((item) => item.id !== id)})
             }).catch(error => console.log(error))
@@ -134,7 +134,7 @@ class App extends React.Component {
         }
         const usernames = this.state.users.filter((item) => users.includes(item["uid"]));
         usernames.forEach((item) => data.users.push(item.username));
-        axios.post(`http://127.0.0.1:8000/api/projects/`, data, {headers})
+        axios.post(`http://80.78.245.74:8000/api/projects/`, data, {headers})
             .then(response => {
                 let new_project = response.data;
                 this.setState({projects: [...this.state.projects, new_project]})
@@ -150,7 +150,7 @@ class App extends React.Component {
             author: author,
             isActive: isActive
         }
-        axios.post(`http://127.0.0.1:8000/api/todos/`, data, {headers})
+        axios.post(`http://80.78.245.74:8000/api/todos/`, data, {headers})
             .then(response => {
                 let new_todo = response.data;
                 let new_project = this.state.projects.filter((item) => item.id === +project)[0];
@@ -170,7 +170,7 @@ class App extends React.Component {
             text: text,
             isActive: isActive
         }
-        axios.put(`http://127.0.0.1:8000/api/todos/` + id + '/', data, {headers})
+        axios.put(`http://80.78.245.74:8000/api/todos/` + id + '/', data, {headers})
             .then(response => {
                 let new_todo = response.data;
                 let new_project = this.state.projects.filter((item) => item.id === +project)[0];
@@ -185,7 +185,7 @@ class App extends React.Component {
 
     loadData() {
         const headers = this.getHeaders();
-        axios.get('http://127.0.0.1:8000/api/users', {headers})
+        axios.get('http://80.78.245.74:8000/api/users', {headers})
             .then(response => {
                 const users = response.data.results;
                 this.setState(
@@ -201,7 +201,7 @@ class App extends React.Component {
             }
         });
 
-        axios.get('http://127.0.0.1:8000/api/projects', {headers})
+        axios.get('http://80.78.245.74:8000/api/projects', {headers})
             .then(response => {
                 const projects = response.data.results;
                 this.setState(
@@ -217,7 +217,7 @@ class App extends React.Component {
             }
         });
 
-        axios.get('http://127.0.0.1:8000/api/todos', {headers})
+        axios.get('http://80.78.245.74:8000/api/todos', {headers})
             .then(response => {
                 const todos = response.data.results
                 this.setState(
